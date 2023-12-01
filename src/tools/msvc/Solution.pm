@@ -574,24 +574,24 @@ sub GenerateFiles
 			'src/include/utils/fmgrprotos.h');
 	}
 
-	if (IsNewer(
-			'src/include/storage/lwlocknames.h',
-			'src/backend/storage/lmgr/lwlocknames.txt'))
-	{
-		print "Generating lwlocknames.c and lwlocknames.h...\n";
-		my $lmgr = 'src/backend/storage/lmgr';
-		system(
-			"perl $lmgr/generate-lwlocknames.pl --outdir $lmgr $lmgr/lwlocknames.txt"
-		);
-	}
-	if (IsNewer(
-			'src/include/storage/lwlocknames.h',
-			'src/backend/storage/lmgr/lwlocknames.h'))
-	{
-		copyFile(
-			'src/backend/storage/lmgr/lwlocknames.h',
-			'src/include/storage/lwlocknames.h');
-	}
+	# if (IsNewer(
+	# 		'src/include/storage/lwlocknames.h',
+	# 		'src/backend/storage/lmgr/lwlocknames.txt'))
+	# {
+	# 	print "Generating lwlocknames.c and lwlocknames.h...\n";
+	# 	my $lmgr = 'src/backend/storage/lmgr';
+	# 	system(
+	# 		"perl $lmgr/generate-lwlocknames.pl --outdir $lmgr $lmgr/lwlocknames.txt"
+	# 	);
+	# }
+	# if (IsNewer(
+	# 		'src/include/storage/lwlocknames.h',
+	# 		'src/backend/storage/lmgr/lwlocknames.h'))
+	# {
+	# 	copyFile(
+	# 		'src/backend/storage/lmgr/lwlocknames.h',
+	# 		'src/include/storage/lwlocknames.h');
+	# }
 
 	if (IsNewer('src/include/utils/probes.h', 'src/backend/utils/probes.d'))
 	{
@@ -745,8 +745,8 @@ EOF
 	$mf =~ /^CATALOG_HEADERS\s*:?=(.*)$/gm
 	  || croak "Could not find CATALOG_HEADERS in Makefile\n";
 	my @bki_srcs = split /\s+/, $1;
-	$mf =~ /^POSTGRES_BKI_DATA\s*:?=[^,]+,(.*)\)$/gm
-	  || croak "Could not find POSTGRES_BKI_DATA in Makefile\n";
+	# $mf =~ /^POSTGRES_BKI_DATA\s*:?=[^,]+,(.*)\)$/gm
+	#   || croak "Could not find POSTGRES_BKI_DATA in Makefile\n";
 	my @bki_data = split /\s+/, $1;
 
 	my $need_genbki = 0;
